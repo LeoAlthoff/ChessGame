@@ -1,5 +1,6 @@
 ﻿using System;
 using board;
+using Chess;
 
 namespace ChessGame
 {
@@ -7,9 +8,21 @@ namespace ChessGame
     {
         static void Main (string[] args)
         {
-            Board board = new Board(8, 8);
+            try
+            {
+                Board board = new Board(8, 8);
 
-            Screen.printscreen(board);
+                board.addPiece(new Rook(Color.Black, board), new Position(0, 9));
+                board.addPiece(new King(Color.Black, board), new Position(0, 0));
+                board.addPiece(new King(Color.Black, board), new Position(2, 4));
+
+                Screen.printscreen(board);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }
