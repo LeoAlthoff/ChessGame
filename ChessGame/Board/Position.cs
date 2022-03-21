@@ -1,11 +1,18 @@
 ﻿namespace board
 {
-    internal class Position
+    class Position
     {
         public int Line { get; set; }
         public int Column { get; set; }
 
-        public Position(int lines, int column) { 
+        public Position(int lines, int column)
+        {
+            this.Line = lines;
+            this.Column = column;
+        }
+
+        public void defineValues(int lines, int column)
+        {
             this.Line = lines;
             this.Column = column;
         }

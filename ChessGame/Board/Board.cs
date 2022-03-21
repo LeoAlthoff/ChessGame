@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using board;
+
 
 namespace board
 {
-    internal class Board
+    class Board
     {
         public int Lines { get; set; }
         public int Columns { get; set; }
@@ -48,9 +45,21 @@ namespace board
             }
         }
 
+        public Piece removePiece(Position pos)
+        {
+            if (piece(pos) == null)
+            {
+                return null;
+            }
+            Piece aux = piece(pos);
+            aux.Position = null;
+            Pieces[pos.Line, pos.Column] = null;
+            return aux;
+        }
+
         public bool validPosition(Position position)
         {
-            if(position.Line< 0 || position.Line>= Lines || position.Column<0 || position.Column>= Columns)
+            if (position.Line < 0 || position.Line >= Lines || position.Column < 0 || position.Column >= Columns)
             {
                 return false;
             }
@@ -60,7 +69,7 @@ namespace board
         public void validatePosition(Position position)
         {
             if (!validPosition(position))
-            throw new BoardException("Not a Valid position!");
+                throw new BoardException("Not a Valid position!");
         }
     }
 }

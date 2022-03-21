@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace board
 {
-    internal class BoardException : Exception
+    class BoardException : Exception
     {
         public BoardException(string msg) : base(msg)
         {
-            
+
         }
     }
 }
