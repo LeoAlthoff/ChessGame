@@ -1,13 +1,14 @@
 ﻿using System;
 using board;
 using chess;
+using System.Collections.Generic;
 
 namespace ChessGame
 {
     class Screen
     {
         public static void printscreen(Board board)
-        {
+        {                
             for (int i = 0; i < board.Lines; i++)
             {
                 int line = 8 - i;
@@ -80,6 +81,38 @@ namespace ChessGame
             int line = int.Parse(s[1] + "");
             return new ChessPosition(column, line);
 
+        }
+        public static void printCapturedPieces(Chess match)
+        {
+            Console.WriteLine("Captured Pieces: ");
+            Console.Write("White: ");
+            printList(match.capturedPieces(Color.White));
+            Console.Write("Black: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            printList(match.capturedPieces(Color.Black));
+            Console.ForegroundColor = aux;
+        }
+
+        public static void printMatch(Chess match)
+        {
+            Screen.printscreen(match.board);
+            Console.WriteLine();
+            printCapturedPieces(match);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.turn);
+            Console.WriteLine("Next move: " + match.CurrentPlayer);
+        }
+        
+
+        public static void printList(List<Piece> pieces)
+        {
+            Console.Write("[");
+            foreach(Piece piece in pieces)
+            {
+                Console.Write(piece + " ");
+            }
+            Console.WriteLine("]");
         }
     }
 }

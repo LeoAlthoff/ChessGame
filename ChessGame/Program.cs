@@ -14,10 +14,7 @@ namespace ChessGame
                 try
                 {
                     Console.Clear();
-                    Screen.printscreen(match.board);
-                    Console.WriteLine();
-                    Console.WriteLine("Turn: " + match.turn);
-                    Console.WriteLine("Next move: " + match.CurrentPlayer);
+                    Screen.printMatch(match);
 
                     Console.WriteLine();
                     Console.Write("Origin: ");
