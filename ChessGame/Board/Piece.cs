@@ -20,6 +20,11 @@
             this.Movements++;
         }
 
+        public void decrementMovements()
+        {
+            this.Movements--;
+        }
+
         public abstract bool[,] possibleMoves();
 
         public bool existPossibleMoves()
