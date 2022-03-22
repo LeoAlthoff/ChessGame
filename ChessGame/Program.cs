@@ -11,24 +11,37 @@ namespace ChessGame
             Chess match = new Chess();
             while (!match.finished)
             {
-                Console.Clear();
-                Screen.printscreen(match.board);
+                try
+                {
+                    Console.Clear();
+                    Screen.printscreen(match.board);
+                    Console.WriteLine();
+                    Console.WriteLine("Turn: " + match.turn);
+                    Console.WriteLine("Next move: " + match.CurrentPlayer);
 
-                Console.WriteLine();
-                Console.Write("Origin: ");
-                Position origin = Screen.readChessPosition().toPosition();
+                    Console.WriteLine();
+                    Console.Write("Origin: ");
+                    Position origin = Screen.readChessPosition().toPosition();
+                    match.validateOriginPosition(origin);
 
-                Console.Clear();
+                    Console.Clear();
 
-                bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
+                    bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
 
-                Screen.printscreen(match.board, possiblePositions);
+                    Screen.printscreen(match.board, possiblePositions);
 
-                Console.WriteLine();
-                Console.Write("Destiny: ");
-                Position destiny = Screen.readChessPosition().toPosition();
+                    Console.WriteLine();
+                    Console.Write("Destiny: ");
+                    Position destiny = Screen.readChessPosition().toPosition();
+                    match.validateDestinyPosition(origin, destiny);
 
-                match.ExecuteMove(origin, destiny);
+                    match.makeMove(origin, destiny);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
 
             }
         }

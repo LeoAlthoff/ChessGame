@@ -21,5 +21,26 @@
         }
 
         public abstract bool[,] possibleMoves();
+
+        public bool existPossibleMoves()
+        {
+            bool[,] mat = possibleMoves();
+            for (int i = 0; i < board.Lines; i++)
+            {
+                for (int j = 0; j < board.Columns; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool canMoveTo(Position pos)
+        {
+            return possibleMoves()[pos.Line, pos.Column];
+        }
     }
 }

@@ -7,8 +7,8 @@ namespace chess
     class Chess
     {
         public Board board { get; private set; }
-        private int turn;
-        private Color CurrentPlayer;
+        public int turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool finished { get; private set; }
 
         public Chess()
@@ -20,12 +20,57 @@ namespace chess
             setGame();
         }
 
+
+
         public void ExecuteMove(Position origin, Position destiny)
         {
             Piece p = board.removePiece(origin);
             p.incrementMovements();
             Piece capturedPiece = board.removePiece(destiny);
             board.addPiece(p, destiny);
+        }
+
+        public void makeMove(Position origin, Position destiny)
+        {
+            ExecuteMove(origin, destiny);
+            turn++;
+            changePlayer();
+        }
+
+        public void validateOriginPosition(Position pos)
+        {
+            if (board.piece(pos) == null)
+            {
+                throw new BoardException("There isn't a piece on the selected square!");
+            }
+            if (CurrentPlayer != board.piece(pos).Color)
+            {
+                throw new BoardException("The selected piece is not yours!");
+            }
+            if (!board.piece(pos).existPossibleMoves())
+            {
+                throw new BoardException("There are no possible moves for the selected piece!");
+            }
+        }
+
+        public void validateDestinyPosition(Position origin, Position destiny)
+        {
+            if (!board.piece(origin).canMoveTo(destiny))
+            {
+                throw new BoardException("Destiny is invalid!");
+            }
+        }
+
+        private void changePlayer()
+        {
+            if (CurrentPlayer == Color.White)
+            {
+                CurrentPlayer = Color.Black;
+            }
+            else
+            {
+                CurrentPlayer = Color.White;
+            }
         }
 
         private void setGame()
