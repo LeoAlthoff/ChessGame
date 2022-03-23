@@ -1,12 +1,16 @@
 ﻿using System;
 using board;
+using chess;
 
 namespace chess
 {
     class King : Piece
     {
-        public King(Color color, Board board) : base(color, board)
+        private Chess match;
+
+        public King(Color color, Board board, Chess match) : base(color, board)
         {
+            this.match = match;
         }
 
         public override string ToString()

@@ -8,38 +8,46 @@ namespace ChessGame
     {
         static void Main (string[] args)
         {
-            Chess match = new Chess();
-            while (!match.finished)
+            try
             {
+                Chess match = new Chess();
                 try
                 {
-                    Console.Clear();
-                    Screen.printMatch(match);
+                    while (!match.finished)
+                    {
 
-                    Console.WriteLine();
-                    Console.Write("Origin: ");
-                    Position origin = Screen.readChessPosition().toPosition();
-                    match.validateOriginPosition(origin);
+                        Console.Clear();
+                        Screen.printMatch(match);
 
-                    Console.Clear();
+                        Console.WriteLine();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.readChessPosition().toPosition();
+                        match.validateOriginPosition(origin);
 
-                    bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
+                        Console.Clear();
 
-                    Screen.printscreen(match.board, possiblePositions);
+                        bool[,] possiblePositions = match.board.piece(origin).possibleMoves();
 
-                    Console.WriteLine();
-                    Console.Write("Destiny: ");
-                    Position destiny = Screen.readChessPosition().toPosition();
-                    match.validateDestinyPosition(origin, destiny);
+                        Screen.printscreen(match.board, possiblePositions);
 
-                    match.makeMove(origin, destiny);
+                        Console.WriteLine();
+                        Console.Write("Destiny: ");
+                        Position destiny = Screen.readChessPosition().toPosition();
+                        match.validateDestinyPosition(origin, destiny);
+
+                        match.makeMove(origin, destiny);
+                    }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                     Console.ReadLine();
                 }
-
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
             }
         }
     }

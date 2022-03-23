@@ -101,10 +101,19 @@ namespace ChessGame
             printCapturedPieces(match);
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.turn);
-            Console.WriteLine("Next move: " + match.CurrentPlayer);
-            if (match.Check)
+            if (!match.finished)
             {
-                Console.WriteLine("CHECK!");
+                Console.WriteLine("Next move: " + match.CurrentPlayer);
+                if (match.Check)
+                {
+                    Console.WriteLine("CHECK!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + match.CurrentPlayer);
+
             }
         }
         

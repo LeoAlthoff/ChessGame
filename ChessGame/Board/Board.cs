@@ -1,7 +1,4 @@
-﻿using board;
-
-
-namespace board
+﻿namespace board
 {
     class Board
     {
@@ -32,16 +29,16 @@ namespace board
             return piece(position) != null;
         }
 
-        public void addPiece(Piece piece, Position position)
+        public void addPiece(Piece piece, Position pos)
         {
-            if (!pieceExistence(position))
+            if (pieceExistence(pos))
             {
-                Pieces[position.Line, position.Column] = piece;
-                piece.Position = position;
+                throw new BoardException("There's already a piece in this position!");
             }
             else
             {
-                throw new BoardException("There's already a piece in this position!");
+                Pieces[pos.Line, pos.Column] = piece;
+                piece.Position = pos;
             }
         }
 
@@ -69,7 +66,7 @@ namespace board
         public void validatePosition(Position position)
         {
             if (!validPosition(position))
-                throw new BoardException("Not a Valid position!");
+                throw new BoardException("Invalid position!");
         }
     }
 }
