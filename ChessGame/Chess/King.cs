@@ -24,6 +24,12 @@ namespace chess
             return p == null || p.Color != this.Color;
         }
 
+        private bool RookTestCastle(Position pos)
+        {
+            Piece R = board.piece(pos);            
+            return pos != null && R is Rook && R.Color == this.Color && R.Movements == 0;
+        }
+
         public override bool[,] possibleMoves()
         {
             bool[,] mat = new bool[board.Lines, board.Columns];
@@ -78,6 +84,35 @@ namespace chess
             if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
+            }
+            //King side castle
+            if(Movements == 0 && !match.Check)
+            {
+                Position posR1 = new Position(Position.Line, Position.Column + 3);
+                if (RookTestCastle(posR1))
+                {
+                    Position p1 = new Position(Position.Line, Position.Column + 1);
+                    Position p2 = new Position(Position.Line, Position.Column + 2);
+                    if(board.piece(p1) == null && board.piece(p2) == null)
+                    {
+                        mat[Position.Line, Position.Column + 2] = true;
+                    }
+                }
+            }
+            //Queen side castle
+            if (Movements == 0 && !match.Check)
+            {
+                Position posR2 = new Position(Position.Line, Position.Column - 4);
+                if (RookTestCastle(posR2))
+                {
+                    Position p1 = new Position(Position.Line, Position.Column - 1);
+                    Position p2 = new Position(Position.Line, Position.Column - 2);
+                    Position p3 = new Position(Position.Line, Position.Column - 3);
+                    if (board.piece(p1) == null && board.piece(p2) == null && board.piece(p3) == null)
+                    {
+                        mat[Position.Line, Position.Column - 2] = true;
+                    }
+                }
             }
             return mat;
         }

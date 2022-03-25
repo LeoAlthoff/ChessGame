@@ -103,7 +103,7 @@ namespace ChessGame
             Console.WriteLine("Turn: " + match.turn);
             if (!match.finished)
             {
-                Console.WriteLine("Next move: " + match.CurrentPlayer);
+                Console.WriteLine("Next move: " + match.currentPlayer);
                 if (match.Check)
                 {
                     Console.WriteLine("CHECK!");
@@ -112,7 +112,7 @@ namespace ChessGame
             else
             {
                 Console.WriteLine("CHECKMATE!");
-                Console.WriteLine("Winner: " + match.CurrentPlayer);
+                Console.WriteLine("Winner: " + match.currentPlayer);
 
             }
         }

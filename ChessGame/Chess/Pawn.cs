@@ -1,12 +1,15 @@
 ﻿using board;
+using chess;
 
 namespace chess
 {
     class Pawn : Piece
     {
-        public Pawn(Color color, Board board) : base(color, board)
+        private Chess match;
+        
+        public Pawn(Color color, Board board, Chess match) : base(color, board)
         {
-
+            this.match = match;
         }
 
         public override string ToString()
@@ -54,6 +57,21 @@ namespace chess
                 {
                     mat[pos.Line, pos.Column] = true;
                 }
+                //EnPassant
+
+                if(Position.Line == 3)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if(board.validPosition(left) && enimyExist(left) && board.piece(left) == match.vulnerableEnPassant)
+                    {
+                        mat[left.Line -1, left.Column] = true;
+                    }
+                    Position right = new Position(Position.Line, Position.Column + 1);
+                    if (board.validPosition(right) && enimyExist(right) && board.piece(right) == match.vulnerableEnPassant)
+                    {
+                        mat[right.Line -1 , right.Column] = true;
+                    }
+                }
             }
             else
             {
@@ -76,6 +94,20 @@ namespace chess
                 if (board.validPosition(pos) && enimyExist(pos))
                 {
                     mat[pos.Line, pos.Column] = true;
+                }
+                //EnPassant
+                if (Position.Line == 4)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if (board.validPosition(left) && enimyExist(left) && board.piece(left) == match.vulnerableEnPassant)
+                    {
+                        mat[left.Line +1, left.Column] = true;
+                    }
+                    Position right = new Position(Position.Line, Position.Column + 1);
+                    if (board.validPosition(right) && enimyExist(right) && board.piece(right) == match.vulnerableEnPassant)
+                    {
+                        mat[right.Line +1, right.Column] = true;
+                    }
                 }
             }
             return mat;
