@@ -54,9 +54,9 @@
             return aux;
         }
 
-        public bool validPosition(Position position)
+        public bool validPosition(Position pos)
         {
-            if (position.Line < 0 || position.Line >= Lines || position.Column < 0 || position.Column >= Columns)
+            if (pos.Line < 0 || pos.Line >= Lines || pos.Column < 0 || pos.Column >= Columns)
             {
                 return false;
             }

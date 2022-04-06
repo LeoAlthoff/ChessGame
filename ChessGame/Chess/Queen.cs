@@ -34,7 +34,7 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line - 1, Position.Column);
+                pos.Line--;
             }
 
 
@@ -47,7 +47,8 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line - 1, Position.Column + 1);
+                pos.Line--;
+                pos.Column++; ;
             }
             //Right
             pos.defineValues(Position.Line, Position.Column + 1);
@@ -58,7 +59,7 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line, Position.Column + 1);
+                pos.Column++;
             }
 
             //Southeast
@@ -70,7 +71,8 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line + 1, Position.Column + 1);
+                pos.Line++;
+                pos.Column++;
             }
 
             //South
@@ -82,7 +84,7 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line + 1, Position.Column);
+                pos.Line++;
             }
             //Southwest
             pos.defineValues(Position.Line + 1, Position.Column - 1);
@@ -93,7 +95,8 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line + 1, Position.Column - 1);
+                pos.Line++;
+                pos.Column--;
             }
             //Left
             pos.defineValues(Position.Line, Position.Column - 1);
@@ -104,7 +107,7 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line, Position.Column - 1);
+                pos.Column--;
             }
             //Northwest
             pos.defineValues(Position.Line - 1, Position.Column - 1);
@@ -115,7 +118,8 @@ namespace chess
                 {
                     break;
                 }
-                pos.defineValues(Position.Line - 1, Position.Column - 1);
+                pos.Line--;
+                pos.Column--;
             }
             return mat;
 

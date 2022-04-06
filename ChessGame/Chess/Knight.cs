@@ -28,69 +28,44 @@ namespace chess
             Position pos = new Position(0, 0);
 
             pos.defineValues(Position.Line - 1, Position.Column - 2);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line - 1, Position.Column - 2);
             }
 
             pos.defineValues(Position.Line - 2, Position.Column - 1);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line - 2, Position.Column - 1);
             }
 
             pos.defineValues(Position.Line - 1, Position.Column + 2);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line - 1, Position.Column + 2);
             }
 
             pos.defineValues(Position.Line -2, Position.Column + 1);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line - 2, Position.Column + 1);
+            }
+            pos.defineValues(Position.Line + 2, Position.Column - 1);
+            if (board.validPosition(pos) && canMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
             }
 
             pos.defineValues(Position.Line + 2, Position.Column + 1);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line + 2, Position.Column + 1);
             }
 
             pos.defineValues(Position.Line + 1, Position.Column + 2);
-            while (board.validPosition(pos) && canMove(pos))
+            if (board.validPosition(pos) && canMove(pos))
             {
-                mat[pos.Line, pos.Column] = true;
-                if (board.piece(pos) != null && board.piece(pos).Color != Color)
-                {
-                    break;
-                }
-                pos.defineValues(Position.Line + 1, Position.Column + 2);
+                mat[pos.Line, pos.Column] = true;                
             }
 
             return mat;

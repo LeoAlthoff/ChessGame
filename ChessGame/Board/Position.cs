@@ -13,8 +13,8 @@
 
         public void defineValues(int lines, int column)
         {
-            this.Line = lines;
-            this.Column = column;
+            Line = lines;
+            Column = column;
         }
 
         public override string ToString()

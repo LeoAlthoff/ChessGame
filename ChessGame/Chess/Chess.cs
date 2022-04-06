@@ -2,6 +2,7 @@
 using board;
 using chess;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace chess
 {
@@ -240,15 +241,15 @@ namespace chess
 
         public List<Piece> piecesInGame(Color color)
         {
-            List<Piece> aux = new List<Piece>();
+            List<Piece> aux1 = new List<Piece>();
             foreach (Piece x in pieces)
             {
                 if (x.Color == color)
                 {
-                    aux.Add(x);
+                    aux1.Add(x);
                 }
             }
-            aux.Except(capturedPieces(color));
+            List<Piece> aux = aux1.Except(capturedPieces(color)).ToList();
             return aux;
         }
 
@@ -264,7 +265,7 @@ namespace chess
             }
         }
 
-        private Piece colorKing(Color color)
+        private Piece king(Color color)
         {
             foreach (Piece x in piecesInGame(color))
             {
@@ -278,8 +279,11 @@ namespace chess
 
         public bool check(Color color)
         {
-            Piece K = colorKing(color);
-
+            Piece K = king(color);
+            if(K == null)
+            {
+                throw new BoardException("There is no king of color" + color + "on the board!");
+            }
             foreach (Piece x in piecesInGame(Adversary(color)))
             {
                 bool[,] mat = x.possibleMoves();

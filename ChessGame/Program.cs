@@ -6,15 +6,15 @@ namespace ChessGame
 {
     class Program
     {
-        static void Main (string[] args)
+        static void Main(string[] args)
         {
+
+            Chess match = new Chess();
             try
             {
-                Chess match = new Chess();
-                try
+                while (!match.finished)
                 {
-                    while (!match.finished)
-                    {
+                    try {
 
                         Console.Clear();
                         Screen.printMatch(match);
@@ -37,18 +37,21 @@ namespace ChessGame
 
                         match.makeMove(origin, destiny);
                     }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.ReadLine();
-                }
+                    catch(BoardException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
+                    }
+                Console.Clear();
+                Screen.printMatch(match);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.ReadLine();
             }
+            Console.ReadLine();
         }
     }
 }

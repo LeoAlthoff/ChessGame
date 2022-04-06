@@ -20,7 +20,7 @@ namespace chess
         private bool enimyExist(Position pos)
         {
             Piece p = board.piece(pos);
-            return p != null && p.Color != this.Color;
+            return p != null && p.Color != Color;
         }
 
         private bool free(Position pos)
@@ -32,13 +32,12 @@ namespace chess
         {
             bool[,] mat = new bool[board.Lines, board.Columns];
 
-            Position pos = new Position(0, 0);
-
+            Position pos = new Position(0,0);
 
             if (Color == Color.White)
             {
                 pos.defineValues(Position.Line - 1, Position.Column);
-                if(board.validPosition(pos) && free(pos))
+                if (board.validPosition(pos) && free(pos))
                 {
                     mat[pos.Line, pos.Column] = true;
                 }
@@ -47,34 +46,35 @@ namespace chess
                 {
                     mat[pos.Line, pos.Column] = true;
                 }
-                pos.defineValues(Position.Line - 1, Position.Column -1);
+                pos.defineValues(Position.Line - 1, Position.Column - 1);
                 if (board.validPosition(pos) && enimyExist(pos))
                 {
                     mat[pos.Line, pos.Column] = true;
                 }
-                pos.defineValues(Position.Line - 1, Position.Column +1);
+                pos.defineValues(Position.Line - 1, Position.Column + 1);
                 if (board.validPosition(pos) && enimyExist(pos))
                 {
                     mat[pos.Line, pos.Column] = true;
                 }
                 //EnPassant
 
-                if(Position.Line == 3)
+                if (Position.Line == 3)
                 {
                     Position left = new Position(Position.Line, Position.Column - 1);
-                    if(board.validPosition(left) && enimyExist(left) && board.piece(left) == match.vulnerableEnPassant)
+                    if (board.validPosition(left) && enimyExist(left) && board.piece(left) == match.vulnerableEnPassant)
                     {
-                        mat[left.Line -1, left.Column] = true;
+                        mat[left.Line - 1, left.Column] = true;
                     }
                     Position right = new Position(Position.Line, Position.Column + 1);
                     if (board.validPosition(right) && enimyExist(right) && board.piece(right) == match.vulnerableEnPassant)
                     {
-                        mat[right.Line -1 , right.Column] = true;
+                        mat[right.Line - 1, right.Column] = true;
                     }
                 }
             }
             else
             {
+                pos = new Position(0, 0);
                 pos.defineValues(Position.Line + 1, Position.Column);
                 if (board.validPosition(pos) && free(pos))
                 {
@@ -101,12 +101,12 @@ namespace chess
                     Position left = new Position(Position.Line, Position.Column - 1);
                     if (board.validPosition(left) && enimyExist(left) && board.piece(left) == match.vulnerableEnPassant)
                     {
-                        mat[left.Line +1, left.Column] = true;
+                        mat[left.Line + 1, left.Column] = true;
                     }
                     Position right = new Position(Position.Line, Position.Column + 1);
                     if (board.validPosition(right) && enimyExist(right) && board.piece(right) == match.vulnerableEnPassant)
                     {
-                        mat[right.Line +1, right.Column] = true;
+                        mat[right.Line + 1, right.Column] = true;
                     }
                 }
             }
